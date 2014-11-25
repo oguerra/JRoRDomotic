@@ -1,0 +1,51 @@
+<h1>Sala</h1>
+<script src="//js.pusher.com/2.2/pusher.min.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function() {
+        Pusher.log = function (message) {
+            if (window.console && window.console.log) {
+                window.console.log(message);
+            }
+        };
+        var pusher = new Pusher('f39ede4193aca3481b9c');
+        var channel = pusher.subscribe('test_channel');
+        channel.bind("foco_principal_sala", function (data) {
+            $("#myonoffswitch").prop('checked', data)
+        });
+        if ($("#foco_principal").val() == "true") {
+            $("#myonoffswitch").prop('checked', true)
+        }
+        else {
+            $("#myonoffswitch").prop('checked', false)
+        }
+    });//fin del onReady
+    function cambiar(){
+        var checado = $("#myonoffswitch").prop('checked')
+        if (checado == true){
+            $.ajax({
+                type: "GET",
+                url: location + "_prender_foco_principal",
+                cache: false
+            });
+        }
+        else{
+            $.ajax({
+                type: "GET",
+                url: location + "_apagar_foco_principal",
+                cache: false
+            });
+        }
+    }
+</script>
+
+<%= hidden_field_tag "foco_principal", @foco %>
+
+
+Foco Principal
+<div class="onoffswitch">
+  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked onclick="cambiar()">
+  <label class="onoffswitch-label" for="myonoffswitch">
+    <span class="onoffswitch-inner"></span>
+    <span class="onoffswitch-switch"></span>
+  </label>
+</div>

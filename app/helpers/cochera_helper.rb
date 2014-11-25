@@ -1,0 +1,2 @@
+module CocheraHelper
+end

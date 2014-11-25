@@ -1,0 +1,23 @@
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+<div class="container">
+  <div class="row">
+    <div class="span4 offset4">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <div class="input-prepend">
+        <span class="add-on">@</span>
+        <%= f.email_field :email, autofocus: true, :placeholder => "Email", :id => "prependedInput"%>
+      </div>
+      <div class="input-prepend">
+        <span class="add-on">*</span>
+        <%= f.password_field :password, autocomplete: "off", :placeholder => "Password", :id => "prependedInput" %>
+      </div><br>
+      <%= f.submit "Log in", :class => "btn btn-primary" %>
+      <span><input type="checkbox" value="remember-me"> Remember me</span><br>
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div> <!-- /container -->
+<% end %>
+
